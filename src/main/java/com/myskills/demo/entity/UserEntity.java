@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -17,5 +18,14 @@ public class UserEntity {
   @GeneratedValue
   private Integer id;
 
+  private String username;
+
+  private String displayPicture;
+
+  private Integer age;
+
+
+  /** one to many relationship **/
+  @OneToMany(mappedBy = "user")
   private List<FeedsEntity> feedsEntityList;
 }
