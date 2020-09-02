@@ -38,7 +38,7 @@ public class FeedService implements IFeedService {
 
   @Override
   public List<Feed> getFeeds(Long userId) {
-    return null;
+    return null; //TODO
   }
 
   @Override
@@ -62,6 +62,15 @@ public class FeedService implements IFeedService {
       commentsEntity.setFeedsEntity(feedsEntity);
       feedsEntity.getCommentsList().add(commentsEntity);
       commentsRepository.save(commentsEntity);
+    });
+  }
+
+  @Override
+  public void likeFeed(Long feedId) {
+    Optional<FeedsEntity> feedOptional = feedRepository.findById(feedId);
+    feedOptional.ifPresent(feedsEntity -> {
+      feedsEntity.setLikes(feedsEntity.getLikes() + 1);
+      feedRepository.save(feedsEntity);
     });
   }
 

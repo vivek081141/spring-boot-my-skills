@@ -13,4 +13,6 @@ public interface IFeedService {
   public void postFeed(Feed feed);
 
   public void postComment(Comment comment);
+
+  public void likeFeed(Long feedId);
 }

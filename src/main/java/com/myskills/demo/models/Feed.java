@@ -20,7 +20,10 @@ public class Feed {
   private Integer likesCount;
 
   public Integer getCommentsCount() {
-    return commentList.size();
+    if (commentList != null && !commentList.isEmpty()){
+      return commentList.size();
+    }
+    return 0;
   }
 
 }

@@ -25,14 +25,14 @@ public class FeedController {
   /**
    * Get the posts posted by user
    **/
-  @GetMapping
-  @RequestMapping(value = "/getMyPost/{userId}", method = RequestMethod.GET)
+  @RequestMapping(value = "/getMyPost/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseBody
   public List<Feed> getMyPosts(@PathVariable(name = "userId", required = true) Long userId) {
     return feedService.getMyPosts(userId);
   }
 
-  @GetMapping
   @RequestMapping(value = "/getFeeds/{userName}", method = RequestMethod.GET)
+  @ResponseBody
   public List<Feed> getFeeds(@PathVariable(name = "userName", required = true) Long userId) {
     return feedService.getFeeds(userId);
   }
@@ -51,8 +51,8 @@ public class FeedController {
 
   @RequestMapping(value = "/like", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public void likeAFeed() {
-
+  public void likeAFeed(@RequestBody @Validated Long feedId) {
+    feedService.likeFeed(feedId);
   }
 
 }
