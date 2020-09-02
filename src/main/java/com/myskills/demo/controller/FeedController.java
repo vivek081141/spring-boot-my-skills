@@ -45,7 +45,7 @@ public class FeedController {
 
   @RequestMapping(value = "/postComment", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
   @ResponseBody
-  public void postComment(Comment comment) {
+  public void postComment(@RequestBody @Validated Comment comment) {
     feedService.postComment(comment);
   }
 
