@@ -2,17 +2,19 @@ package com.myskills.demo.models;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import java.util.List;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@ToString
 public class Feed {
-  private User user;
+
+  @NotBlank(message = "User id can not be empty")
+  private Long userId;
   private String postedDate;
   private String header;
-  private String shortDescription;
+  @NotBlank(message = "feed cannot be empty")
+  private String description;
   private List<Comment> commentList;
   private Integer commentsCount;
   private Integer likesCount;

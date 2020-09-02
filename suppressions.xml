@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.1//EN"
+        "http://www.checkstyle.org/dtds/suppressions_1_1.dtd">
+<suppressions>
+    <!-- skip magic number check in test files -->
+    <suppress checks="MagicNumber" files=".*[\\/](test)[\\/]"/>
+</suppressions>

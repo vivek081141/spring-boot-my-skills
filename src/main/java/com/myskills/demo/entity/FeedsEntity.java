@@ -3,9 +3,12 @@ package com.myskills.demo.entity;
 import lombok.Data;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -18,19 +21,28 @@ public class FeedsEntity {
 
   @Id
   @GeneratedValue
-  private Integer id;
+  @Column (name = "ID")
+  private Long id;
 
+  @Column(name = "FEED_DETAIL")
   private String feedDetail;
 
+  @Column (name = "POSTED_ON")
   private Date postedOn;
 
-  private Number likes;
+  @Column (name = "LIKES")
+  private Integer likes;
 
-  /** many to one relationship **/
-  @ManyToOne
-  private UserEntity user;
+  /**
+   * many to one relationship
+   **/
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "USER_ID")
+  private UserEntity userEntity;
 
-  /** one to many relationship **/
+  /**
+   * one to many relationship
+   **/
   @OneToMany(mappedBy = "feedsEntity")
   private List<CommentsEntity> commentsList;
 

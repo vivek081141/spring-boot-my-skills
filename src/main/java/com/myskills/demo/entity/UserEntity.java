@@ -1,8 +1,12 @@
 package com.myskills.demo.entity;
 
 import lombok.Data;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -16,16 +20,35 @@ public class UserEntity {
 
   @Id
   @GeneratedValue
-  private Integer id;
+  @Column (name = "ID")
+  private Long id;
 
+  @Column (name = "USERNAME")
   private String username;
 
+  @Column (name = "DISPLAY_PICTURE")
   private String displayPicture;
 
-  private Integer age;
+  @Column (name = "AGE")
+  private Long age;
 
 
-  /** one to many relationship **/
-  @OneToMany(mappedBy = "user")
-  private List<FeedsEntity> feedsEntityList;
+  /**
+   * one to many relationship
+   **/
+  @OneToMany(mappedBy = "userEntity",
+          cascade = CascadeType.ALL,
+          orphanRemoval = true,
+          fetch = FetchType.EAGER)
+  private List<FeedsEntity> feedsEntityList = new ArrayList<>();
+
+  public void addComment(FeedsEntity feedsEntity) {
+    feedsEntityList.add(feedsEntity);
+    feedsEntity.setUserEntity(this);
+  }
+
+  public void removeComment(FeedsEntity feedsEntity) {
+    feedsEntityList.remove(feedsEntity);
+    feedsEntity.setUserEntity(null);
+  }
 }

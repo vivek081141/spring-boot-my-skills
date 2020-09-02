@@ -8,9 +8,10 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Comment {
+  private Long feedId;
   private String comment;
-  private String commentedBy;
+  private Long commentedBy;
   private String commentedOn;
   private String commentedByDP;
 
- }
+}
