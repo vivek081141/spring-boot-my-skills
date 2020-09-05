@@ -12,16 +12,18 @@ import java.util.List;
 @Component
 public class FeedConverter {
 
-  public  List<Feed> convertFeedEntityToFeed(List<FeedsEntity> feedsEntityList) {
+  public List<Feed> convertFeedEntityToFeed(Long userId, List<FeedsEntity> feedsEntityList) {
     if (feedsEntityList == null || feedsEntityList.isEmpty()) {
       return null;
     }
     List<Feed> feedList = new ArrayList<>();
-    for (FeedsEntity feedsEntity: feedsEntityList) {
+    for (FeedsEntity feedsEntity : feedsEntityList) {
       Feed feed = new Feed();
+      feed.setUserId(userId);
       feed.setHeader(feedsEntity.getFeedDetail());
       feed.setDescription(feedsEntity.getFeedDetail());
       feed.setLikesCount(feedsEntity.getLikes());
+      feed.setPostedDate(DateConverter.getStringFromDate(feedsEntity.getPostedOn()));
       feedList.add(feed);
     }
     return feedList;

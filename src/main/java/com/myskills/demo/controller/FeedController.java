@@ -6,7 +6,6 @@ import com.myskills.demo.services.IFeedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/feeds")
+//@CrossOrigin(origins = "http://localhost:4200/", maxAge = 3600)
 public class FeedController {
 
   @Autowired
@@ -31,9 +31,9 @@ public class FeedController {
     return feedService.getMyPosts(userId);
   }
 
-  @RequestMapping(value = "/getFeeds/{userName}", method = RequestMethod.GET)
+  @RequestMapping(value = "/getFeeds/{userId}", method = RequestMethod.GET)
   @ResponseBody
-  public List<Feed> getFeeds(@PathVariable(name = "userName", required = true) Long userId) {
+  public List<Feed> getFeeds(@PathVariable(name = "userId", required = true) Long userId) {
     return feedService.getFeeds(userId);
   }
 

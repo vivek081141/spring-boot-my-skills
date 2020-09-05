@@ -1,6 +1,7 @@
 package com.myskills.demo.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -13,7 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "USER_TBL")
 public class UserEntity {
@@ -32,15 +34,17 @@ public class UserEntity {
   @Column (name = "AGE")
   private Long age;
 
-
   /**
    * one to many relationship
    **/
   @OneToMany(mappedBy = "userEntity",
           cascade = CascadeType.ALL,
           orphanRemoval = true,
-          fetch = FetchType.EAGER)
+          fetch = FetchType.LAZY)
   private List<FeedsEntity> feedsEntityList = new ArrayList<>();
+
+
+
 
   public void addComment(FeedsEntity feedsEntity) {
     feedsEntityList.add(feedsEntity);

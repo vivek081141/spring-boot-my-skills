@@ -1,6 +1,7 @@
 package com.myskills.demo.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -14,7 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "FEED_TBL")
 public class FeedsEntity {
@@ -36,7 +38,7 @@ public class FeedsEntity {
   /**
    * many to one relationship
    **/
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "USER_ID")
   private UserEntity userEntity;
 

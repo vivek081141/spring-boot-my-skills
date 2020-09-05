@@ -1,6 +1,7 @@
 package com.myskills.demo.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "COMMENT_TBL")
 public class CommentsEntity {

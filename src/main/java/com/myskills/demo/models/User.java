@@ -1,13 +1,9 @@
 package com.myskills.demo.models;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import java.util.List;
 
-@Setter
-@Getter
-@ToString
+@Data
 public class User {
   private String userName;
   private String displayProfile;

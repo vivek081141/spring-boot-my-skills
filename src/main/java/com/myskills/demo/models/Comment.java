@@ -1,13 +1,9 @@
 package com.myskills.demo.models;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class Comment {
   @NotBlank(message = "Feed id can not be empty")
   private Long feedId;
