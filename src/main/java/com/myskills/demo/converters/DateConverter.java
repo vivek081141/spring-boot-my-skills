@@ -20,7 +20,7 @@ public class DateConverter {
     DateFormat dateFormat = new SimpleDateFormat(DD_MM_YYYY);
     try {
       date = dateFormat.parse(postedOn);
-    } catch (ParseException e) {
+    } catch (Exception e) {
       date = new Date();
     }
     return date;

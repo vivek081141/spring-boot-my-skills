@@ -4,11 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
-@SpringBootApplication
-public class MySkillsApplication {
+import java.util.Arrays;
 
-  public static void main(String[] args) {
-    ApplicationContext ctx = SpringApplication.run(MySkillsApplication.class, args);
-  }
+@SpringBootApplication
+public class SpringBootMySkillsApplication {
+
+	public static void main(String[] args) {
+		 SpringApplication.run(SpringBootMySkillsApplication.class, args);
+	}
 
 }

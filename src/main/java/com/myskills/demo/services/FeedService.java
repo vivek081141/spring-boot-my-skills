@@ -1,5 +1,6 @@
 package com.myskills.demo.services;
 
+
 import com.myskills.demo.converters.FeedConverter;
 import com.myskills.demo.entity.CommentsEntity;
 import com.myskills.demo.entity.FeedsEntity;
@@ -78,18 +79,22 @@ public class FeedService implements IFeedService {
   }
 
   @Override
-  public void postFeed(Feed feed) {
+  public List<Feed> postFeed(Feed feed) {
+    List<Feed> feedList = new ArrayList<>();
     Optional<UserEntity> userOptional = userRepository.findById(feed.getUserId());
-    userOptional.ifPresent(x -> {
+    userOptional.ifPresent(userEntity -> {
       FeedsEntity feedsEntity = feedConverter.convertFeedModelToEntity(feed);
-      feedsEntity.setUserEntity(x);
-      x.getFeedsEntityList().add(feedsEntity);
+      feedsEntity.setUserEntity(userEntity);
+      userEntity.getFeedsEntityList().add(feedsEntity);
       feedRepository.save(feedsEntity);
+      feedList.addAll(feedConverter.convertFeedEntityToFeed(userEntity.getId(), userEntity.getFeedsEntityList()));
     });
+    return feedList;
   }
 
   @Override
-  public void postComment(Comment comment) {
+  public List<Comment> postComment(Comment comment) {
+    List<Comment> commentList = new ArrayList<>();
     Optional<FeedsEntity> feedOptional = feedRepository.findById(comment.getFeedId());
     feedOptional.ifPresent(feedsEntity -> {
       UserEntity user = userRepository.findById(comment.getCommentedBy()).get();
@@ -98,7 +103,9 @@ public class FeedService implements IFeedService {
       commentsEntity.setFeedsEntity(feedsEntity);
       feedsEntity.getCommentsList().add(commentsEntity);
       commentsRepository.save(commentsEntity);
+      commentList.addAll(feedConverter.convertCommentEntityToModel(feedsEntity.getCommentsList()));
     });
+    return commentList;
   }
 
   @Override
